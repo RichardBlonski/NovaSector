@@ -66,12 +66,14 @@
 	affected_carbon.set_jitter_if_lower(20 SECONDS * seconds_per_tick)
 	affected_carbon.set_hallucinations_if_lower(10 SECONDS)
 
+/* NOVA EDIT REMOVAL START - MOVED TO MODULAR.
 /datum/addiction/alcohol/withdrawal_stage_3_process(mob/living/carbon/affected_carbon, seconds_per_tick)
 	. = ..()
 	affected_carbon.set_jitter_if_lower(30 SECONDS * seconds_per_tick)
 	affected_carbon.set_hallucinations_if_lower(10 SECONDS)
 	if(SPT_PROB(4, seconds_per_tick) && !HAS_TRAIT(affected_carbon, TRAIT_ANTICONVULSANT))
 		affected_carbon.apply_status_effect(/datum/status_effect/seizure)
+*/ // NOVA EDIT REMOVAL END
 
 /datum/addiction/hallucinogens
 	name = "hallucinogen"

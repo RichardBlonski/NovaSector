@@ -42,3 +42,17 @@
 		trigger_random_side_effect(affected_carbon, seconds_per_tick, 2)
 	if(SPT_PROB(0.7, seconds_per_tick))
 		to_chat(affected_carbon, span_danger("[withdrawal_stage_messages[3]]"))
+
+/datum/addiction/alcohol
+	addiction_gain_threshold = 900
+	addiction_loss_threshold = 600
+
+/datum/addiction/alcohol/withdrawal_stage_3_process(mob/living/carbon/affected_carbon, seconds_per_tick)
+	. = ..()
+	affected_carbon.set_jitter_if_lower(30 SECONDS * seconds_per_tick)
+	affected_carbon.set_hallucinations_if_lower(10 SECONDS)
+	// Drunk people are spared seizures unless they are in really bad shape
+	if(affected_carbon.get_drunk_amount() > 30)
+		return
+	if(SPT_PROB(4, seconds_per_tick) && !HAS_TRAIT(affected_carbon, TRAIT_ANTICONVULSANT))
+		affected_carbon.apply_status_effect(/datum/status_effect/seizure)
